@@ -71,8 +71,114 @@ createDeck() {
         }
     }
 
+    shuffleDeck() {    
+        for (let i = this.deck.length - 1; i > 0; i--) {  //  runs through as a loop to randomaly select numbers from the Math.random
+            let j = Math.floor(Math.random() * (i + 1));
+            [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+        }
+        
+    }
 }
 
-const deck = new Deck 
-deck.createDeck()
-console.log(deck.deck);
+// Class for a game (War Game)
+/**
+ * Needs:
+ * A deck inside of our Game Class
+ * - Create, shuffle, and pass the Deck 
+ * 
+ * Logic to play the game, 
+ *  Turn based, How many?
+ *  Do players have a hand yet?
+ * Control flow statement logic to decide who wins
+ * 
+ * 
+ * - Players  - 2  
+ * Need ?  
+ * Hand, 
+ * score
+ * name
+ * 
+ * 
+ */
+
+class Game {
+ constructor() {
+    this.player1 = {
+        name: 'Kristi',
+        score: 0, 
+        hand: []
+    }
+    this.player2 = {
+        name: 'John',
+        score: 0, 
+        hand: []
+    }
+ }
+// method to play the game 
+//**
+// pass out cards to players
+// take X amount of turns as long as players have cards, (or the number of cards they have)
+// award points based on card.value
+// log the winner
+//
+//
+//  */
+
+playGame() {
+    //instatiate a new Deck, create a new deck, and shuffle the deck.
+
+    const deck = new Deck
+    deck.createDeck()
+    deck.shuffleDeck()
+
+    while (deck.deck.length !== 0) {
+        this.player1.hand.push(deck.deck.shift())
+        this.player2.hand.push(deck.deck.shift())
+    }
+//actually playing the game. How many turns are needed? 
+
+for (let i = 0; i < this.player1.hand.length; i++)  {
+// conditional logic based on awarding points based on comparing the card values. 
+    if (this.player1.hand[i].value > this.player2.hand[i].value)  {
+        this.player1.score ++ 
+        console.log(`
+            p1 Card: ${this.player1.hand[i].name}
+            p2 Card: ${this.player2.hand[i].name}
+            ${this.player1.name} wins a point!
+            Current Score: p1: ${this.player1.score}, p2: ${this.player2.score}
+            `)
+         } else if (this.player2.hand[i].value > this.player1.hand[i].value) {
+            this.player2.score ++ 
+            console.log(`
+            p1 Card: ${this.player1.hand[i].name}
+            p2 Card: ${this.player2.hand[i].name}
+            ${this.player2.name} wins a point!  ... But ${this.player1.name} is still the Winner!
+            Current Score: p1: ${this.player1.score}, p2: ${this.player2.score}
+                    `)
+         } else {
+           console.log(`
+            p1 Card: ${this.player1.hand[i].name}
+            p2 Card: ${this.player2.hand[i].name}
+            Tie:  No Points Awarded.... but ${this.player1.name} is still the winner!
+            Current Score: ${this.player1.name}: ${this.player1.score}, ${this.player2.name}: ${this.player2.score}
+                   `)
+                }
+            }
+            if (this.player1.score > this.player2.score) {
+                console.log(`${this.player1.name} wins!`)  
+            } else if (this.player2.score > this.player1.score) {
+                console.log(`${this.player2.name} wins! but Kristi is always the Winner!`)
+            } else { 
+                console.log(`It's a tie! ${this.player1.name} Wins by default!`)
+                
+            }
+        }
+}
+
+
+const game = new Game
+game.playGame()
+
+
+
+
