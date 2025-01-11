@@ -33,7 +33,8 @@
  * 
  * 
  */
-
+ 
+// class of Deck has all the cards and rankings for points. 
 class Deck {
     constructor() {
         this.deck = [];
@@ -54,11 +55,11 @@ class Deck {
         ]; 
         this.suits = [
             "Hearts ♥", "Diamonds ♦", "Spades ♠", "Clubs ♣"
-        ];
+        ]; // Deck and suits to match 
     }
     //Method to create the deck ... an iteration. 
     // push a new card into this.deck
-createDeck() {
+createDeck() {   // creates a deck from looping through iterations of the ranks and suits. 
     for (let i = 0; i < this.suits.length; i++) {
         for(let j = 0; j < this.ranks.length; j++) {
             let card = {
@@ -104,12 +105,12 @@ createDeck() {
 class Game {
  constructor() {
     this.player1 = {
-        name: 'Kristi',
+        name: 'Kristi', // added my wife as Player1 because she always beats everyone at War. 
         score: 0, 
         hand: []
     }
     this.player2 = {
-        name: 'John',
+        name: 'John',  //  I don't play very well. 
         score: 0, 
         hand: []
     }
@@ -130,7 +131,8 @@ playGame() {
     const deck = new Deck
     deck.createDeck()
     deck.shuffleDeck()
-
+                            //shuffles the deck after creating a new deck. 
+                            
     while (deck.deck.length !== 0) {
         this.player1.hand.push(deck.deck.shift())
         this.player2.hand.push(deck.deck.shift())
@@ -138,46 +140,47 @@ playGame() {
 //actually playing the game. How many turns are needed? 
 
 for (let i = 0; i < this.player1.hand.length; i++)  {
-// conditional logic based on awarding points based on comparing the card values. 
+// conditional logic based on awarding points based on comparing the card values.  
+// the below lines tabulate the numbe of times each player wins a hand. Hands are won based on score values being higher than the other players score value
     if (this.player1.hand[i].value > this.player2.hand[i].value)  {
         this.player1.score ++ 
-        console.log(`
+        console.log(` 
             p1 Card: ${this.player1.hand[i].name}
             p2 Card: ${this.player2.hand[i].name}
             ${this.player1.name} wins a point!
-            Current Score: p1: ${this.player1.score}, p2: ${this.player2.score}
-            `)
+            Current Score: p1: ${this.player1.score}, p2: ${this.player2.score} 
+            `) // logs player's scores
          } else if (this.player2.hand[i].value > this.player1.hand[i].value) {
-            this.player2.score ++ 
-            console.log(`
+            this.player2.score ++ // adds result value to current this.player2.score
+            console.log(`   
             p1 Card: ${this.player1.hand[i].name}
             p2 Card: ${this.player2.hand[i].name}
-            ${this.player2.name} wins a point!  ... But ${this.player1.name} is still the Winner!
+            ${this.player2.name} wins a point!  ... But ${this.player1.name} is still the Winner!  
             Current Score: p1: ${this.player1.score}, p2: ${this.player2.score}
-                    `)
-         } else {
-           console.log(`
+                    `)  // logs the winner based on score accumulationsfor player2
+         } else { // if there is a tie. 
+           console.log(` 
             p1 Card: ${this.player1.hand[i].name}
             p2 Card: ${this.player2.hand[i].name}
             Tie:  No Points Awarded.... but ${this.player1.name} is still the winner!
             Current Score: ${this.player1.name}: ${this.player1.score}, ${this.player2.name}: ${this.player2.score}
                    `)
-                }
+                } // console log of the players hands, tie result, current score.  I made Kristi be the winner all the time so she would be happy.
             }
             if (this.player1.score > this.player2.score) {
                 console.log(`${this.player1.name} wins!`)  
             } else if (this.player2.score > this.player1.score) {
-                console.log(`${this.player2.name} wins! but Kristi is always the Winner!`)
+                console.log(`${this.player2.name} wins! but Kristi is always the Winner!`)  // Kristi always wins at War. 
             } else { 
-                console.log(`It's a tie! ${this.player1.name} Wins by default!`)
-                
+                console.log(`It's a tie! ${this.player1.name} Wins by default!`)  // Kristi always wins at War. 
+
             }
         }
-}
+}  
 
 
-const game = new Game
-game.playGame()
+const game = new Game  // New game as game is a Constant
+game.playGame()   // starts the game. 
 
 
 
