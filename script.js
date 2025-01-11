@@ -66,7 +66,6 @@ createDeck() {
                 value: j + 1
             }
             this.deck.push(card)
-            console.log(card)
            }
       
         }
@@ -76,3 +75,4 @@ createDeck() {
 
 const deck = new Deck 
 deck.createDeck()
+console.log(deck.deck);
